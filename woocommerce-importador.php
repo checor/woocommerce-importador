@@ -5,9 +5,9 @@ Description: Work-in-progress plugin that get prices from Amazon and other sites
 Author: Sergio I Urbina
 License: GPLv2
  */
-
+//
 //Dashboard widget                                                           .
-
+//
 add_action( 'wp_dashboard_setup', 'che_dashboard_widget' );
 
 function che_dashboard_widget () {
@@ -22,22 +22,41 @@ function che_dashboard_widget () {
 		echo '<p>Precios aumentados:n/a \n</p>';
 		echo "<p>Precios reducidos: $foo \ntest</p>";
 	}
-
+//
 //Metabox widget
-
+//
 add_action( 'add_meta_boxes', 'che_metabox_create');
 
 function che_metabox_create() {
-	add_meta_box('che_meta', 'Price updater', 'che_metabox_body', 'product',
+	add_meta_box('che_meta', 'Importador', 'che_metabox_body', 'product',
 		'normal', 'high');
 }
 
 function che_metabox_body() {
-	echo 'Hola Guaymo!';
+	//Retrieve the data if it exist first
+	//$che_= get_post_meta ($
+	?><p><input type="checkbox" name="che_checkbox_enable"/><?php
+	echo "Enabled in this product</p>";
+	echo '<p>Link(s): '
+	?><textarea rows="3" cols="80"></textarea>
+	<p>Fixed import cost: <input type="text" name="che_text_fixedprice"
+		value=""/></p>
+	<p>Percentage cost:<input type="text" name="che_text_percost"
+		value=""/></p>
+	<p>Minimun between the two will be selected</p>
+<?php
 }
+//
+//Metabox save data
+//
+add_action('save_post', 'che_metabox_savedata');
 
+function che_metabox_savedata(){
+	//update_post_meta( $post_id, '
+}
+//
 //Top level menu
-
+//
 add_action( 'admin_menu', 'che_create_admin_menu');
 
 function che_create_admin_menu() {
